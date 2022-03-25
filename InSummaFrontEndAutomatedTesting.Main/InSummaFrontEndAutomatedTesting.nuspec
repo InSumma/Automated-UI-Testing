@@ -4,12 +4,12 @@
     <id>InSummaFrontEndAutomatedTesting</id>
     <authors>Frank Molengraaf</authors>
 	<version>0.0.0</version>
-    <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <license type="expression">MIT</license>
-    <description>Package description</description>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <license type="expression">GNU GPLv3</license>
+    <description>Easily run automated UI tests in Visual Studio projects by writing test scenario's using JSON.</description>
     <releaseNotes>Summary of changes made in this release of the package.</releaseNotes>
     <copyright>$copyright$</copyright>
-    <tags>Tag1 Tag2 Tag3</tags>
+    <tags>UI Tests Selenium Unit Test Automated</tags>
     <dependencies>
       <group targetFramework="net6.0">
         <dependency id="Microsoft.Extensions.DependencyInjection" version="6.0.0" />
