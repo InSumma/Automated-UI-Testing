@@ -1,40 +1,40 @@
 # Automated-UI-Testing
-Easily run automated UI tests in Visual Studio projects by writing test scenario's using JSON.
+Library for easily running automated UI tests in Visual Studio projects through writing test scenario's in JSON.
 
 ## Table of Contents
 - [Directories](#directories)
 - [The input file](#the-input-file)
 - [Using library in unit test project](#using-library-in-unit-test-project)
 ## Directories
-Test case files have to be added to the directory ``` /TestCases ``` in the root where the ``` .csproj ``` project file is located.
-Blueprints can be added in a subdirectory of the test case directory; ``` /TestCases/BluePrints ```
+Test case files have to be placed to the directory ``` /TestCases ``` below the root folder where the ``` .csproj ``` project file is located.
+Blueprints can be added in a subdirectory of this test case using this folder structure; ``` /TestCases/BluePrints ```
 ***Directory names are case sensitive.***
 
 
 ## The input file
 To use the library, a valid input file in JSON format is required with the following properties:
- - ``` testName ``` is the name of the rest. It is required to ensure that tests can be distinguished of eachother.
- - ``` osType``` is an enumeration that describes on which platform your testscenario will run. This is metadata that can be used in your test framework. Currently supported values are:
+ - ``` testName ``` is the name of the test. It is required to ensure that tests can be distinguished of other tests.
+ - ``` osType``` is an enumeration that describes on which platform your testscenario will run. This is metadata that can be used in your test framework. Current supported values are:
 	- ``` Windows```
 	- ``` MacOS```
 	- ``` Linux```
- - ``` webBrowserType``` is an enumeration that describes on which web browser your tests will run. Currently supported values are:
+ - ``` webBrowserType``` is an enumeration which describes on which web browser your tests will run. Currently supported values are:
 	- ``` Chrome```
 	- ``` Edge```
 	- ``` FireFox```
 	- ``` Safari```
- - ``` driverPath``` resides an optional value that resides the URI of the web driver. If the web driver is in the path variable, this field can be ignored. Example: ``` C:\\Users\\frankmolengraaf\\ChromeDriver\\chromedriver_win32```
-This webdriver has to be the same version as your browser.
+ - ``` driverPath``` is an optional value that describes the URI of the web driver. If the web driver is contained in the path variable, this field can be ignored. Example: ``` C:\\Users\\frankmolengraaf\\ChromeDriver\\chromedriver_win32```
+This web driver has to be the same version as your browser.
  - ``` url ``` contains the system under test url.
  - ``` actions ``` is an array that contains the actions that have to be executed in procedural order. There are multiple types of actions that can be used.
-	 - Blueprints: Blueprints are used to be able to reuse a set of actions. The blueprints json files consist of:  ``` bluePrintName``` and an array of ``` actions ```.  
+	 - Blueprints: Blueprints are used to be able to reuse a set of actions. The blueprint json files consist of:  ``` bluePrintName``` and an array of ``` actions ```.  
 	 - Click: This action simulates a mouse click. Required fields:
 		 - ``` actionType ``` is an enumeration. Required value for Click actions is ``` Click ```.
 		 - ``` locatorType ``` is an enumeration used to describe which locator has to be targeted. Possible values:
 			 - ``` ClassName```
 			 - ``` Id```
 			 - ``` XPath```			 
-		 - ``` targetElement ``` resides the 'name' of the target element.
+		 - ``` targetElement ``` contains the 'name' of the target element.
 		 Example when using the ``` locatorType``` ``` Id``` ``` targetElement : "username" ```
 		 - ```delayInSeconds``` integer value that results in a delay (in seconds) of the specified action.
 	  - SendKeys: This action simulates keyboard input in input fields. Required fields: ```SendKeys```
@@ -43,17 +43,17 @@ This webdriver has to be the same version as your browser.
 			 - ``` ClassName```
 			 - ``` Id```
 			 - ``` XPath```			 
-		 - ``` targetElement ``` resides the 'name' of the target element.
+		 - ``` targetElement ``` contains the 'name' of the target element.
 		 Example when using the ``` locatorType``` ``` Id``` ``` targetElement : "email" ```
-		- ``` data ```  resides the value that has to be filled into the form.
+		- ``` data ```  contains the value that has to be filled into the form.
 		- ```delayInSeconds``` integer value that results in a delay (in seconds) of the specified action.
-- ```finalCondition``` resides the expected final condition.
+- ```finalCondition``` contains the expected final condition.
 	- ```locatorType``` is an enumeration used to describe which locator has to be targeted. Possible values:
 			 - ``` Url```
 			 - ``` ClassName```
 			 - ``` Id```
 			 - ``` XPath```		
-	 - 	 ``` targetElement ``` resides the 'name' of the expected final target element that should be visible. Used when ```locatorType``` is ``` ClassName```, ``` Id``` or ``` XPath``` 
+	 - 	 ``` targetElement ``` contains the 'name' of the expected final target element that should be visible. Used when ```locatorType``` is ``` ClassName```, ``` Id``` or ``` XPath``` 
 	- ```url``` contains the expected final url. Only used when ```locatorType``` is ```url```
 #### Example Template
 
@@ -114,7 +114,7 @@ This webdriver has to be the same version as your browser.
 ```
 
 ## Using library in unit test project
-To use the library in the unit test project, follow the following steps:
+To use the library in the unit test project, follow these steps:
 1. Create new unit test (project).
 2. Import Automated UI Test library.
 3. Call the `StartUp.Run` method:
@@ -158,4 +158,3 @@ namespace InSummaWebdashboard.UITests
     }
 }
 ```
-
