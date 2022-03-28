@@ -2,8 +2,9 @@
 Easily run automated UI tests in Visual Studio projects by writing test scenario's using JSON.
 
 ## Table of Contents
-- [Run](#run)
-
+- [Directories](#directories)
+- [The input file](#the-input-file)
+- [Using library in unit test project](#using-library-in-unit-test-project)
 ## Directories
 Test case files have to be added to the directory ``` /TestCases ``` in the root where the ``` .csproj ``` project file is located.
 Blueprints can be added in a subdirectory of the test case directory; ``` /TestCases/BluePrints ```
