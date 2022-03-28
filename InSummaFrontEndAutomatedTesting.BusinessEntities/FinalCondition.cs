@@ -10,6 +10,7 @@ namespace InSummaFrontEndAutomatedTesting.BusinessEntities
     public class FinalCondition
     {
         public string? TargetElement { get; set; }
-        public LocatorType LocatorType { get; set; }
+        public ValidatorLocatorType LocatorType { get; set; }
+        public string? Url { get; set; }
     }
 }

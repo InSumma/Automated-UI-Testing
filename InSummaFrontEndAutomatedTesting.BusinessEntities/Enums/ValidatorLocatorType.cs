@@ -1,6 +1,6 @@
 ﻿namespace InSummaFrontEndAutomatedTesting.BusinessEntities.Enums
 {
-    public enum LocatorType
+    public enum ValidatorLocatorType
     {
         CLASSNAME,
         ID,

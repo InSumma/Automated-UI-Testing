@@ -13,7 +13,7 @@ namespace InSummaFrontEndAutomatedTesting.TestingLogic.API
     public class SeleniumService : IActionService
     {
         private readonly ILogger<SeleniumService> _logger;
-        private static readonly TimeSpan _defaultWaitingTime = new(0, 0, 10);
+        private static readonly TimeSpan _defaultWaitingTime = new TimeSpan(0, 0, 10);
 
         public SeleniumService(ILogger<SeleniumService> logger)
         {
@@ -29,9 +29,9 @@ namespace InSummaFrontEndAutomatedTesting.TestingLogic.API
                     throw new ArgumentException($"'{nameof(action.TargetElement)}' cannot be null or whitespace.", nameof(action.TargetElement));
                 }
 
-                IWebElement element = CreateElement(driver, action.TargetElement, action.LocatorType);
-
                 CreateDelay(action);
+
+                IWebElement element = CreateElement(driver, action.TargetElement, action.LocatorType);   
              
                 element.Click();
 
@@ -79,7 +79,7 @@ namespace InSummaFrontEndAutomatedTesting.TestingLogic.API
 
         public bool Validate(IWebDriver driver, FinalCondition validationCondition)
         {
-            if (string.IsNullOrWhiteSpace(validationCondition.TargetElement))
+            if (validationCondition.LocatorType != ValidatorLocatorType.URL && string.IsNullOrWhiteSpace(validationCondition.TargetElement))
             {
                 throw new ArgumentException($"'{nameof(validationCondition.TargetElement)}' cannot be null or whitespace.", nameof(validationCondition.TargetElement));
             }
@@ -87,6 +87,11 @@ namespace InSummaFrontEndAutomatedTesting.TestingLogic.API
             if(driver == null)
             {
                 throw new ArgumentNullException(nameof(driver));
+            }
+
+            if(validationCondition.LocatorType == ValidatorLocatorType.URL && validationCondition.Url != null)
+            {
+                return driver.Url.Equals(new Uri(validationCondition.Url).AbsoluteUri);
             }
 
             Thread.Sleep(_defaultWaitingTime); // Create a gap of 10 seconds between last click and the validation process.
@@ -131,6 +136,17 @@ namespace InSummaFrontEndAutomatedTesting.TestingLogic.API
                 LocatorType.CLASSNAME => By.ClassName(locator),
                 LocatorType.ID => By.Id(locator),
                 LocatorType.XPATH => By.XPath(locator),
+                _ => By.Id(locator),
+            };
+        }
+
+        private static By CreateSearchCriteria(string locator, ValidatorLocatorType locatorType)
+        {
+            return locatorType switch
+            {
+                ValidatorLocatorType.CLASSNAME => By.ClassName(locator),
+                ValidatorLocatorType.ID => By.Id(locator),
+                ValidatorLocatorType.XPATH => By.XPath(locator),
                 _ => By.Id(locator),
             };
         }

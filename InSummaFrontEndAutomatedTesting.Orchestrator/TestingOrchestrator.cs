@@ -8,13 +8,6 @@ using System.Reflection;
 
 namespace InSummaFrontEndAutomatedTesting.Orchestrator
 {
-
-    /*
-     * 
-    To do:
-    - Browser settings; talen.... snelheid
-    */
-   
     internal class TestingOrchestrator : ITestingOrchestrator
     {
         private readonly RunResult _runResult;
