@@ -8,6 +8,7 @@ Library for easily running automated UI tests in Visual Studio projects through 
 ## Directories
 Test case files have to be placed to the directory ``` /TestCases ``` below the root folder where the ``` .csproj ``` project file is located.
 Blueprints can be added in a subdirectory of this test case using this folder structure; ``` /TestCases/BluePrints ```
+
 ***Directory names are case sensitive.***
 
 
