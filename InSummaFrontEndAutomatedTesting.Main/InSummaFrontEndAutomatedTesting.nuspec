@@ -5,7 +5,7 @@
     <authors>Frank Molengraaf</authors>
 	<version>0.0.0</version>
     <requireLicenseAcceptance>true</requireLicenseAcceptance>
-    <license type="expression">GNU GPLv3</license>
+    <license type="expression">GPL-3.0-or-later</license>
     <description>Easily run automated UI tests in Visual Studio projects by writing test scenario's using JSON.</description>
     <releaseNotes>Summary of changes made in this release of the package.</releaseNotes>
     <copyright>$copyright$</copyright>
