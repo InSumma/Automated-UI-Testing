@@ -31,7 +31,7 @@ steps:
   displayName: 'Change version number'
   inputs:
     targetType: 'inline'
-    script: '((Get-Content -path "$(System.DefaultWorkingDirectory)\InSummaFrontEndAutomatedTesting.Main\InSummaFrontEndAutomatedTesting.nuspec" -Raw) -replace ''<version>0.0.0</version>'',''<version>$(majorMinorVersion).$(semanticVersion)</version>'') | Set-Content -Path "$(System.DefaultWorkingDirectory)\InSummaFrontEndAutomatedTesting\InSummaFrontEndAutomatedTesting.Main\InSummaFrontEndAutomatedTesting.nuspec"'
+    script: '((Get-Content -path "$(System.DefaultWorkingDirectory)\InSummaFrontEndAutomatedTesting.Main\InSummaFrontEndAutomatedTesting.nuspec" -Raw) -replace ''<version>0.0.0</version>'',''<version>$(majorMinorVersion).$(semanticVersion)</version>'') | Set-Content -Path "$(System.DefaultWorkingDirectory)\InSummaFrontEndAutomatedTesting.Main\InSummaFrontEndAutomatedTesting.nuspec"'
 
 - task: NuGetCommand@2
   displayName: 'NuGet Pack'
