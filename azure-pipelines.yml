@@ -1,0 +1,49 @@
+name: $(majorMinorVersion).$(semanticVersion) # $(rev:r)
+
+trigger:
+- develop
+- master
+
+pool:
+  vmImage: windows-2022
+
+variables:
+  majorMinorVersion: 1.0
+  semanticVersion: $[counter(variables['majorMinorVersion'], 0)]
+
+steps:
+- task: UseDotNet@2
+  displayName: 'Install .NET Core sdk 6.x'
+  inputs:
+    version: 6.x
+
+- task: NuGetToolInstaller@1
+  inputs:
+    versionSpec: '6.0.0'
+
+- task: DotNetCoreCLI@2
+  displayName: 'Build Project'
+  inputs:
+    command: 'build'
+    projects: '**/*.Main.csproj'
+    arguments: '--configuration Release'
+
+- task: PowerShell@2
+  displayName: 'Change version number'
+  inputs:
+    targetType: 'inline'
+    script: '((Get-Content -path "$(System.DefaultWorkingDirectory)\InSummaFrontEndAutomatedTesting\InSummaFrontEndAutomatedTesting.Main\InSummaFrontEndAutomatedTesting.nuspec" -Raw) -replace ''<version>0.0.0</version>'',''<version>$(majorMinorVersion).$(semanticVersion)</version>'') | Set-Content -Path "$(System.DefaultWorkingDirectory)\InSummaFrontEndAutomatedTesting\InSummaFrontEndAutomatedTesting.Main\InSummaFrontEndAutomatedTesting.nuspec"'
+
+- task: NuGetCommand@2
+  displayName: 'NuGet Pack'
+  inputs:
+    command: 'pack'
+    configuration: 'Release'
+    packagesToPack: '**/*.Main.csproj'
+    includeReferencedProjects: true
+
+- task: PublishBuildArtifacts@1
+  displayName: Publish NuGet Package
+  inputs:
+    PathtoPublish: $(build.artifactstagingdirectory)
+    ArtifactName: NuGetPackage
